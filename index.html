@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#090b14">
+<title>IN ONE Studio Pro</title><link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand"><span class="brand-mark">IN</span><div><b>IN ONE</b><small>STUDIO PRO</small></div></div>
+    <button class="nav active" data-page="home">⌂ <span>Dashboard</span></button>
+    <div class="nav-label">WORKSPACES</div>
+    <button class="nav" data-page="video">▣ <span>Video & Timeline</span></button>
+    <button class="nav" data-page="motion">◈ <span>Motion & Camera</span></button>
+    <button class="nav" data-page="photo">▧ <span>Photo Studio</span></button>
+    <button class="nav" data-page="audio">♫ <span>Audio Studio</span></button>
+    <button class="nav" data-page="captions">T <span>Caption Studio</span></button>
+    <button class="nav" data-page="text">Aa <span>Text & Animation</span></button>
+    <button class="nav" data-page="vfx">✧ <span>VFX & Background</span></button>
+    <button class="nav" data-page="three">⬡ <span>3D Studio</span></button>
+    <button class="nav" data-page="ai">✦ <span>AI Studio</span></button>
+    <button class="nav" data-page="projects">▤ <span>Projects</span></button>
+    <div class="sidebar-bottom"><span class="dot"></span> Local workspace <small>v1.5.0 PRO</small></div>
+  </aside>
+  <main class="main">
+    <header class="topbar"><div><span class="eyebrow">CREATIVE WORKSPACE</span><h1 id="pageTitle">Dashboard</h1></div><div class="top-actions"><span class="status">● Local mode</span><button class="btn secondary" id="grantPermissionsBtn">Grant Permissions</button><button class="btn secondary" id="saveProject">Save project</button></div></header>
+    <section id="home" class="page active">
+      <div class="hero"><div><span class="eyebrow">ALL-IN-ONE CREATIVE SUITE</span><h2>Create without<br><em>switching apps.</em></h2><p>Video, motion, photo, audio, captions, VFX and 3D tools in one workspace.</p><button class="btn primary" data-goto="video">Open Video Editor →</button></div><div class="hero-art"><div class="orb"></div><div class="art-card">IN<span>ONE</span><small>STUDIO PRO</small></div></div></div>
+      <div class="section-head"><h3>Creative modules</h3><span>Choose a workspace</span></div>
+      <div class="module-grid">
+        <button class="module" data-goto="video"><b>▣</b><strong>Video & Timeline</strong><small>Import · preview · clip list</small></button>
+        <button class="module" data-goto="motion"><b>◈</b><strong>Motion & Camera</strong><small>Keyframe controls · parenting</small></button>
+        <button class="module" data-goto="photo"><b>▧</b><strong>Photo Studio</strong><small>Image preview · filters</small></button>
+        <button class="module" data-goto="audio"><b>♫</b><strong>Audio Studio</strong><small>Audio preview · volume</small></button>
+        <button class="module" data-goto="captions"><b>T</b><strong>Caption Studio</strong><small>Manual captions · SRT</small></button>
+        <button class="module" data-goto="vfx"><b>✧</b><strong>VFX & Background</strong><small>Effects preview controls</small></button>
+        <button class="module" data-goto="three"><b>⬡</b><strong>3D Studio</strong><small>3D viewport demo</small></button>
+        <button class="module" data-goto="ai"><b>✦</b><strong>AI Studio</strong><small>Provider setup panel</small></button>
+      </div>
+      <div class="notice"><b>Build status:</b> Core local editing utilities are implemented. Cloud AI, neural background removal, advanced 3D mesh tools and production-grade rendering need provider credentials/native engine integration; they are not represented as finished.</div>
+    </section>
+
+    <section id="video" class="page">
+      <div class="toolbar"><label class="btn primary file-btn">＋ Import media<input id="mediaInput" type="file" accept="video/*,audio/*,image/*" multiple></label><button class="btn secondary" id="nativePickVideo">Select Videos for Pro MP4 Export</button><button class="btn secondary" id="clearTimeline">Clear timeline</button><button class="btn secondary" id="exportProject">Export project JSON</button></div>
+      <div class="panel pro-panel"><div class="panel-title">Project setup <span>Sequence settings</span></div>
+        <div class="pro-controls">
+          <label>Canvas <select id="projectResolution"><option value="1920x1080">Full HD · 1920×1080</option><option value="3840x2160">4K UHD · 3840×2160</option><option value="1080x1920">Vertical · 1080×1920</option><option value="1080x1080">Square · 1080×1080</option><option value="1080x1350">Portrait · 1080×1350</option><option value="2560x1440">QHD · 2560×1440</option></select></label>
+          <label>Frame rate <select id="projectFps"><option>23.976</option><option>24</option><option>25</option><option>29.97</option><option selected>30</option><option>50</option><option>59.94</option><option>60</option><option>120</option></select></label>
+          <label>Color space <select id="projectColor"><option>Rec.709</option><option>sRGB</option><option>Display P3</option><option>Rec.2020</option></select></label>
+          <label>Aspect ratio <select id="projectAspect"><option>16:9</option><option>9:16</option><option>1:1</option><option>4:5</option><option>21:9</option><option>2.39:1</option></select></label>
+          <label>Auto-save <select id="autosaveInterval"><option value="0">Off</option><option value="1" selected>Every 1 minute</option><option value="5">Every 5 minutes</option><option value="10">Every 10 minutes</option></select></label>
+          <button class="btn secondary" id="saveSequence">Apply sequence settings</button>
+        </div><p class="hint" id="sequenceStatus">Sequence settings are project metadata; export dimensions depend on the active render engine.</p>
+      </div>
+      <div class="editor-grid">
+        <div class="panel preview-panel"><div class="panel-title">Preview monitor <span id="mediaType">No media</span></div><div class="preview" id="preview"><div class="empty">Import a video, audio or image<br><small>Your preview appears here</small></div></div><div class="transport"><button id="playPause" class="btn primary">▶ Play</button><span id="timeReadout">00:00 / 00:00</span><input id="seek" type="range" min="0" max="1000" value="0"></div></div>
+        <div class="panel inspector"><div class="panel-title">Clip inspector</div><div id="inspectorBody" class="muted">Select a clip from the timeline.</div></div>
+      </div>
+      <div class="panel timeline-panel"><div class="panel-title">Native MP4 trim export <span id="nativeExportStatus">Ready when a video is selected</span></div><div class="toolbar"><label class="range-label">Start (seconds) <input id="trimStart" type="number" min="0" step="0.1" value="0"></label><label class="range-label">End (seconds) <input id="trimEnd" type="number" min="0.1" step="0.1" value="5"></label><button class="btn primary" id="nativeTrimExport">Export Pro MP4 (Effects + Merge)</button><button class="btn secondary" id="cancelNativeExport">Cancel export</button></div><div class="panel-title">Timeline <span id="clipCount">0 clips</span></div><div class="timeline-ruler"><span>00:00</span><span>00:05</span><span>00:10</span><span>00:15</span><span>00:20</span></div><div id="timeline" class="timeline"><div class="empty">Your imported media will appear as timeline clips.</div></div>
+        <div class="panel-title">Timeline markers <span id="markerCount">0 markers</span></div>
+        <div class="toolbar wrap"><button class="btn secondary" id="addMarker">＋ Add marker at playhead</button><button class="btn secondary" id="clearMarkers">Clear markers</button></div>
+        <div id="markerList" class="marker-list muted">No markers yet.</div>
+      </div>
+      <div class="panel"><div class="panel-title">Clip color & playback controls <span>Live preview</span></div>
+        <div class="pro-controls">
+          <label>Playback speed <select id="clipSpeed"><option value="0.25">0.25×</option><option value="0.5">0.5×</option><option value="0.75">0.75×</option><option value="1" selected>1×</option><option value="1.25">1.25×</option><option value="1.5">1.5×</option><option value="2">2×</option><option value="3">3×</option></select></label>
+          <label>Exposure <input id="gradeExposure" type="range" min="50" max="150" value="100"></label>
+          <label>Contrast <input id="gradeContrast" type="range" min="50" max="180" value="100"></label>
+          <label>Saturation <input id="gradeSaturation" type="range" min="0" max="200" value="100"></label>
+          <label>Warmth <input id="gradeWarmth" type="range" min="-50" max="50" value="0"></label>
+          <label>Rotation <select id="clipRotation"><option value="0" selected>0°</option><option value="90">90°</option><option value="180">180°</option><option value="270">270°</option></select></label>
+          <button class="btn secondary" id="resetGrade">Reset grade</button>
+        </div><p class="hint">Color controls and speed affect the selected clip's live preview. Exposure, Contrast, Saturation, Rotation, Speed & Trim are baked directly into the exported MP4 video!</p>
+      </div>
+      <p class="hint">Native Media3 Transformer trim export is included for Android. Multi-track compositing, transitions, frame-accurate timeline editing and advanced render effects are not yet implemented.</p>
+    </section>
+
+    <section id="motion" class="page">
+      <div class="section-head"><h3>Motion & Camera controls</h3><span>2D transform playground</span></div>
+      <div class="panel control-grid">
+        <label>Position X <input type="range" id="posX" min="-300" max="300" value="0"></label>
+        <label>Position Y <input type="range" id="posY" min="-200" max="200" value="0"></label>
+        <label>Scale <input type="range" id="scale" min="25" max="200" value="100"></label>
+        <label>Rotation <input type="range" id="rotation" min="-180" max="180" value="0"></label>
+        <label>Opacity <input type="range" id="opacity" min="10" max="100" value="100"></label>
+        <label>Camera zoom <input type="range" id="camZoom" min="50" max="200" value="100"></label>
+      </div>
+      <div class="panel motion-stage"><div id="motionObject">IN ONE</div></div>
+      <div class="toolbar"><button class="btn primary" id="addKeyframe">＋ Add keyframe</button><button class="btn secondary" id="playKeyframes">▶ Play keyframes</button><button class="btn secondary" id="resetMotion">Reset transforms</button></div>
+      <div class="toolbar wrap"><button class="btn secondary motion-preset" data-animation="float">Float</button><button class="btn secondary motion-preset" data-animation="pulse">Pulse</button><button class="btn secondary motion-preset" data-animation="swing">Swing</button><button class="btn secondary motion-preset" data-animation="shake">Shake</button><button class="btn secondary motion-preset" data-animation="spin">Spin</button><button class="btn secondary motion-preset" data-animation="stop">Stop animation</button></div>
+      <div class="panel"><div class="panel-title">Keyframe list</div><div id="keyframes" class="muted">No keyframes yet. Add a keyframe to store the current transform.</div></div>
+      <p class="hint">Working: live transform preview, keyframe snapshots and preset motion animations. Keyframes are stored as project metadata; full timeline interpolation/rendering still requires a native compositor.</p>
+    </section>
+
+    <section id="photo" class="page">
+      <div class="toolbar"><label class="btn primary file-btn">＋ Import photo<input id="photoInput" type="file" accept="image/*"></label><button class="btn secondary" id="downloadPhoto">Download preview</button></div>
+      <div class="panel photo-stage" id="photoStage"><span class="muted">Choose a photo to preview edits.</span><img id="photoPreview" hidden></div>
+      <div class="panel control-grid">
+        <label>Brightness <input id="brightness" type="range" min="50" max="160" value="100"></label>
+        <label>Contrast <input id="contrast" type="range" min="50" max="160" value="100"></label>
+        <label>Saturation <input id="saturation" type="range" min="0" max="200" value="100"></label>
+        <label>Blur <input id="blur" type="range" min="0" max="8" value="0"></label>
+      </div>
+      <p class="hint">Working: local image preview and CSS filter adjustments. Layer-based editing and AI cutout are not included yet.</p>
+    </section>
+
+    <section id="audio" class="page">
+      <div class="toolbar"><label class="btn primary file-btn">＋ Import audio<input id="audioInput" type="file" accept="audio/*" multiple></label></div>
+      <div class="panel"><div class="panel-title">Audio player</div><audio id="audioPlayer" controls></audio><label class="range-label">Volume <input id="audioVolume" type="range" min="0" max="100" value="80"></label><div id="audioList" class="list muted">Import an audio file to begin.</div></div>
+      <div class="panel"><div class="panel-title">Audio tone controls <span>Live playback processing</span></div>
+        <div class="pro-controls">
+          <label>Bass <input id="eqBass" type="range" min="-12" max="12" value="0"></label>
+          <label>Mid <input id="eqMid" type="range" min="-12" max="12" value="0"></label>
+          <label>Treble <input id="eqTreble" type="range" min="-12" max="12" value="0"></label>
+          <label>Compressor <select id="audioCompressor"><option value="off">Off</option><option value="light">Light</option><option value="strong">Strong</option></select></label>
+          <button class="btn secondary" id="resetAudioFx">Reset audio FX</button>
+        </div><p class="hint" id="audioFxStatus">Audio EQ is applied during playback when Web Audio is supported. It is not yet rendered into an exported audio file.</p>
+      </div>
+      <p class="hint">Working: audio file import, playback and volume. Multitrack mixing, EQ, denoise and waveform editing need further implementation.</p>
+    </section>
+
+    <section id="text" class="page">
+      <div class="section-head"><h3>Text Designer & Motion Presets</h3><span>Live typography studio</span></div>
+      <div class="editor-grid">
+        <div class="panel"><div class="panel-title">Text canvas <span>Live preview</span></div><div id="textStage" class="text-stage"><div id="textArtwork" class="text-artwork">YOUR TITLE</div></div>
+          <div class="toolbar wrap"><button class="btn primary" id="playTextAnimation">▶ Preview animation</button><button class="btn secondary" id="stopTextAnimation">Stop</button><button class="btn secondary" id="exportTextPng">Export PNG</button></div>
+        </div>
+        <div class="panel"><div class="panel-title">Typography controls</div>
+          <label class="range-label">Text <input id="designText" type="text" value="YOUR TITLE" maxlength="80"></label>
+          <label class="range-label">Style <select id="textStyle"><option value="neon">Neon Glow</option><option value="cinematic">Cinematic</option><option value="bold">Bold Impact</option><option value="gradient">Gradient</option><option value="outline">Outline</option><option value="retro">Retro</option><option value="minimal">Minimal</option><option value="bubble">Bubble</option><option value="gold">Luxury Gold</option><option value="glitch">Glitch</option></select></label>
+          <label class="range-label">Animation <select id="textAnimation"><option value="fade">Fade In</option><option value="zoom">Zoom In</option><option value="bounce">Bounce</option><option value="slide">Slide Up</option><option value="type">Typewriter</option><option value="flip">Flip</option><option value="pulse">Pulse</option><option value="shake">Shake</option><option value="float">Float</option><option value="glow">Glow</option></select></label>
+          <label class="range-label">Font size <input id="textSize" type="range" min="18" max="120" value="42"></label>
+          <label class="range-label">Font family <select id="textFont"><option value="Arial">Arial</option><option value="Georgia">Georgia</option><option value="Impact">Impact</option><option value="Trebuchet MS">Trebuchet MS</option><option value="Courier New">Courier New</option><option value="system-ui">System</option></select></label>
+          <label class="range-label">Letter spacing <input id="textTracking" type="range" min="-2" max="16" value="0"></label>
+          <label class="range-label">Text stroke <input id="textStroke" type="range" min="0" max="6" value="0"></label>
+          <label class="range-label">Text color <input id="textColor" type="color" value="#ffffff"></label>
+          <label class="range-label">Background color <input id="textBg" type="color" value="#111827"></label>
+          <label class="range-label">Background opacity <input id="textBgOpacity" type="range" min="0" max="100" value="0"></label>
+          <button class="btn primary" id="addTextCaption">＋ Add as caption</button>
+        </div>
+      </div>
+      <p class="hint">Text styles, animation previews and PNG title-card export work locally. Applying animated text as a rendered video layer requires the full video compositor.</p>
+    </section>
+
+    <section id="captions" class="page">
+      <div class="toolbar"><button class="btn primary" id="addCaption">＋ Add caption</button><label class="btn secondary file-btn">Import SRT<input id="srtInput" type="file" accept=".srt,.vtt,text/plain"></label><button class="btn secondary" id="downloadSrt">Export SRT</button></div>
+      <div class="panel"><div class="panel-title">Caption editor <span id="captionCount">0 captions</span></div><div id="captionList"></div></div>
+      <div class="panel"><div class="panel-title">Caption preview</div><div id="captionPreview" class="caption-preview">Your caption preview</div></div>
+      <p class="hint">Working: manual caption creation/editing and SRT import/export. Automatic speech recognition and word-level timing are not connected.</p>
+    </section>
+
+    <section id="vfx" class="page">
+      <div class="section-head"><h3>VFX & Background</h3><span>Preview effects</span></div>
+      <div class="panel effect-preview" id="effectPreview">EFFECT PREVIEW</div>
+      <div class="toolbar wrap"><button class="btn secondary effect" data-filter="none">Reset</button><button class="btn secondary effect" data-filter="grayscale(1)">B&W</button><button class="btn secondary effect" data-filter="contrast(1.5) saturate(1.5)">Cinematic</button><button class="btn secondary effect" data-filter="hue-rotate(90deg)">Hue shift</button><button class="btn secondary effect" data-filter="blur(2px)">Soft blur</button></div>
+      <div class="panel"><div class="panel-title">Background tools</div><p class="muted">AI photo/video background removal and replacement require a connected segmentation model or cloud API. This build does not fake those operations.</p></div>
+    </section>
+
+    <section id="three" class="page">
+      <div class="section-head"><h3>3D Studio</h3><span>Interactive viewport demo</span></div>
+      <div class="panel three-stage"><div class="cube" id="cube"><div class="face front">IN</div><div class="face back">ONE</div><div class="face right">3D</div><div class="face left">STUDIO</div><div class="face top">PRO</div><div class="face bottom">2026</div></div></div>
+      <div class="toolbar"><label class="range-label">Rotate X <input id="rotX" type="range" min="-180" max="180" value="-20"></label><label class="range-label">Rotate Y <input id="rotY" type="range" min="-180" max="180" value="35"></label></div>
+      <p class="hint">Working: CSS 3D viewport demo and rotation controls. This is not a mesh modeller; OBJ/GLB import, topology tools, sculpting and PBR rendering are not implemented.</p>
+    </section>
+
+    <section id="ai" class="page">
+      <div class="section-head"><h3>AI Video Review & Creative Assistant</h3><span>Local analysis + optional AI API</span></div>
+      <div class="notice">First, the app checks video properties and sampled frames locally. For AI feedback, add your own API key. Keys are used only for the current session and are never saved in project files. API usage may incur provider charges.</div>
+      <div class="panel"><div class="panel-title">Video review</div><p class="muted">Select a video clip in Video & Timeline, then run the review.</p><div class="toolbar wrap"><button class="btn primary" id="analyzeVideo">✦ Analyze selected video</button><span id="analysisStatus" class="muted">Waiting for video</span></div><div id="analysisResults" class="analysis-results">Your video quality score, visual checks, title ideas and banner direction will appear here.</div></div>
+      <div class="panel"><div class="panel-title">AI API connection</div><div class="ai-settings">
+        <label>Provider<select id="aiProvider"><option value="openai">OpenAI / OpenAI-compatible</option><option value="gemini">Google Gemini</option><option value="anthropic">Anthropic Claude</option></select></label>
+        <label>Model<input id="aiModel" value="gpt-4o-mini" placeholder="Model name"></label>
+        <label>API endpoint (optional)<input id="aiEndpoint" placeholder="Leave blank for provider default"></label>
+        <label>API key<input id="aiKey" type="password" autocomplete="off" placeholder="Paste your API key"></label>
+      </div><div class="toolbar wrap"><button class="btn secondary" id="testAIConnection">Test API connection</button><span id="aiConnectionStatus" class="muted">Not connected</span></div></div>
+      <div class="panel"><div class="panel-title">AI creative tools</div><div class="toolbar wrap"><button class="btn secondary" id="generateTitles">Generate titles & hooks</button><button class="btn secondary" id="generateBannerBrief">Create banner brief</button><button class="btn secondary" id="generateEditPlan">Suggest edit plan</button></div><div id="aiCreativeOutput" class="analysis-results">Run a video review or choose a creative tool.</div></div>
+      <p class="hint">Supported native API adapters: OpenAI-compatible chat completions, Gemini generateContent and Anthropic Messages. Provider keys and network access are required. No AI service is bundled or free by default.</p>
+    </section>
+
+    <section id="projects" class="page">
+      <div class="toolbar"><button class="btn primary" id="saveProject2">Save locally</button><label class="btn secondary file-btn">Import project JSON<input id="projectInput" type="file" accept=".json,application/json"></label><button class="btn secondary" id="exportProject2">Download project JSON</button></div>
+      <div class="panel"><div class="panel-title">Current project</div><div id="projectInfo" class="muted">Untitled project · 0 clips · not saved</div><input id="projectName" placeholder="Project name" value="My IN ONE Project"></div>
+      <div class="panel"><div class="panel-title">Local save status</div><p id="saveStatus" class="muted">Not saved yet.</p></div>
+    </section>
+    <footer>IN ONE Studio Pro 1.4.0 · Local-first editing workspace</footer>
+  </main>
+</div>
+<script src="app.js"></script>
+</body></html>
